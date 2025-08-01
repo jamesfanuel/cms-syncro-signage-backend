@@ -1,0 +1,43 @@
+# Composer dependencies
+/vendor/
+
+# Cache, logs, tmp files
+*.log
+*.cache
+*.tmp
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*.local
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# PHPUnit
+phpunit.xml
+phpunit.result.cache
+
+# Laravel (opsional jika pakai)
+storage/
+bootstrap/cache/
+
+# CodeIgniter
+writable/cache/
+writable/logs/
+writable/session/
+
+# Symfony
+var/
+
+# Zip
+*.zip
+
+# Uploads File
+uploads/*
+uploads_tmp/*
+

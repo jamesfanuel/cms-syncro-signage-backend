@@ -1,0 +1,40 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/helpers/response.php';
+
+$conn = getDatabaseConnection();
+$GLOBALS['conn'] = $conn;
+
+$prefixes = [
+    'auth'     => '/api/auth',
+    'product'  => '/api/product',
+    'client'   => '/api/client',
+    'customer' => '/api/customer',
+    'outlet'   => '/api/outlet',
+    'formation'=> '/api/formation',
+];
+
+// Map file ke folder khusus jika diperlukan
+$folderMap = [
+    'product'   => 'master',
+    'client'    => 'master',
+    'outlet'    => 'master',
+    'formation' => 'master',
+];
+
+foreach ($prefixes as $file => $prefix) {
+    $folder = $folderMap[$file] ?? '.';
+    $routeFile = __DIR__ . "/routes/{$folder}/{$file}.php";
+
+    if (file_exists($routeFile)) {
+        require_once $routeFile;
+    } else {
+        error_log("Route file not found: $routeFile");
+    }
+}

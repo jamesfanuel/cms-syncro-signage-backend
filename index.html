@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Video with Progress</title>
+    <style>
+        #progressContainer {
+            width: 100%;
+            background-color: #eee;
+        }
+
+        #progressBar {
+            width: 0%;
+            height: 20px;
+            background-color: #4CAF50;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Upload Video</h2>
+    <input type="file" id="videoInput">
+    <button onclick="uploadFile()">Upload</button>
+
+    <div id="progressContainer">
+        <div id="progressBar">0%</div>
+    </div>
+
+    <div id="status"></div>
+
+    <script>
+        async function uploadFile() {
+            const file = document.getElementById("videoInput").files[0];
+            if (!file) return;
+
+            const chunkSize = 2 * 1024 * 1024; // 2 MB
+            const totalChunks = Math.ceil(file.size / chunkSize);
+            const fileName = file.name;
+
+            const progressBar = document.getElementById("progressBar");
+
+            for (let i = 0; i < totalChunks; i++) {
+                const start = i * chunkSize;
+                const end = Math.min(start + chunkSize, file.size);
+                const chunk = file.slice(start, end);
+
+                const formData = new FormData();
+                formData.append("chunk", chunk);
+                formData.append("fileName", fileName);
+                formData.append("chunkIndex", i);
+                formData.append("totalChunks", totalChunks);
+
+                try {
+                    const response = await fetch("upload.php", {
+                        method: "POST",
+                        body: formData
+                    });
+                    const text = await response.text();
+                    document.getElementById("status").innerText = `Chunk ${i + 1}/${totalChunks}: ${text}`;
+                } catch (e) {
+                    alert("Upload gagal di chunk " + i);
+                    return;
+                }
+
+                // Update progress bar
+                const percent = Math.round(((i + 1) / totalChunks) * 100);
+                progressBar.style.width = percent + "%";
+                progressBar.innerText = percent + "%";
+            }
+
+            document.getElementById("status").innerText = "Upload selesai!";
+        }
+    </script>
+</body>
+
+</html>
