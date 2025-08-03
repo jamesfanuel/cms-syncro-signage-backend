@@ -4,7 +4,7 @@ function getDatabaseConnection()
     $host = "localhost";
     $db   = "syncro_signage_db";
     $user = "root";
-    $pass = "rahasia123";
+    $pass = "K4t4Kunc1!";
 
     $mysqli = new mysqli($host, $user, $pass, $db);
 
