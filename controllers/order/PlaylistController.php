@@ -1,9 +1,9 @@
 <?php
-class CampaignController
+class PlaylistController
 {
-    private CampaignService $service;
+    private PlaylistService $service;
 
-    public function __construct(CampaignService $service)
+    public function __construct(PlaylistService $service)
     {
         $this->service = $service;
     }
@@ -33,9 +33,9 @@ class CampaignController
     {
         $payload = json_decode(file_get_contents('php://input'), true);
 
-        if (!$payload || !isset($payload['customer_id'])) {
+        if (!$payload) {
             http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Data tidak valid atau customer_id kosong']);
+            echo json_encode(['status' => 'error', 'message' => 'Payload kosong']);
             return;
         }
 

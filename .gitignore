@@ -41,3 +41,6 @@ var/
 uploads/*
 uploads_tmp/*
 
+# Config
+config/*
+

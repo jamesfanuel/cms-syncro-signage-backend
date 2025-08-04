@@ -1,6 +1,6 @@
 <?php
 
-class Formation
+class Screen
 {
     public $screen_id;
     public $outlet_id;
@@ -27,8 +27,8 @@ class Formation
         $this->outlet_name         = $data['outlet_name'] ?? null;
     }
     
-    public static function fromArray(array $data): Formation
+    public static function fromArray(array $data): Screen
     {
-        return new Formation($data);
+        return new Screen($data);
     }
 }

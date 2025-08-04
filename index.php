@@ -18,7 +18,9 @@ $prefixes = [
     'customer' => '/api/customer',
     'outlet'   => '/api/outlet',
     'formation'=> '/api/formation',
-    'campaign'=> '/api/campaign',
+    'campaign' => '/api/campaign',
+    'order'    => '/api/order',
+    'playlist' => '/api/playlist',
 ];
 
 // Map file ke folder khusus jika diperlukan
@@ -28,6 +30,8 @@ $folderMap = [
     'outlet'    => 'master',
     'formation' => 'master',
     'campaign'  => 'order',
+    'order'     => 'order',
+    'playlist'  => 'order',
 ];
 
 foreach ($prefixes as $file => $prefix) {

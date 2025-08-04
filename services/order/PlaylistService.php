@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__ . '/../../repositories/master/FormationRepository.php';
+require_once __DIR__ . '/../../repositories/order/PlaylistRepository.php';
 
-class FormationService
+class PlaylistService
 {
-    private FormationRepository $repository;
+    private PlaylistRepository $repository;
 
-    public function __construct(FormationRepository $repository)
+    public function __construct(PlaylistRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -15,14 +15,9 @@ class FormationService
         return $this->repository->find($customerId);
     }
 
-    public function findById(int $id): ?Formation
+    public function findById(int $id): ?Playlist
     {
         return $this->repository->findById($id);
-    }
-
-    public function findByOutlet(int $outletId): array
-    {
-        return $this->repository->findByOutlet($outletId);
     }
 
     public function create(array $data): array

@@ -8,12 +8,24 @@ class FormationController
         $this->service = $service;
     }
 
-    public function find(?int $customerId = null): void
+    public function find(?int $screenId = null): void
     {
-        $clients = $this->service->find($customerId);
+        $screens = $this->service->find($screenId);
 
         header('Content-Type: application/json');
-        echo json_encode(['status' => 'success', 'data' => $clients]);
+        echo json_encode(['status' => 'success', 'data' => $screens]);
+    }
+
+    public function findByOutlet(int $outletId)
+    {
+        if (!$outletId) {
+            http_response_code(400);
+            echo json_encode(['status' => 'error', 'message' => 'Outlet ID wajib diisi']);
+            return;
+        }
+
+        $screen = $this->service->findByOutlet($outletId);
+        echo json_encode(['status' => 'success', 'data' => $screen]);
     }
 
 
@@ -25,17 +37,17 @@ class FormationController
             return;
         }
 
-        $customer = $this->service->findById($id);
-        echo json_encode(['status' => 'success', 'data' => $customer]);
+        $screen = $this->service->findById($id);
+        echo json_encode(['status' => 'success', 'data' => $screen]);
     }
 
     public function create()
     {
         $payload = json_decode(file_get_contents('php://input'), true);
 
-        if (!$payload || !isset($payload['customer_id'])) {
+        if (!$payload || !isset($payload['screen_id'])) {
             http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Data tidak valid atau customer_id kosong']);
+            echo json_encode(['status' => 'error', 'message' => 'Data tidak valid atau screen_id kosong']);
             return;
         }
 

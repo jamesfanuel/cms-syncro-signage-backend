@@ -42,3 +42,9 @@ if (preg_match('#^/api/customer/(\d+)/formations$#', $uri, $matches) && $method 
 if ($uri === '/api/formation/create' && $method === 'POST') {
     $controller->create();
 }
+
+// GET /api/outlet/{outlet_id}/formations
+if (preg_match('#^/api/outlet/(\d+)/formations$#', $uri, $matches) && $method === 'GET') {
+    $id = (int) $matches[1];
+    $controller->findByOutlet($id);
+}

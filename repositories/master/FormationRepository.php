@@ -51,6 +51,25 @@ class FormationRepository
         return $result ? Screen::fromArray($result) : null;
     }
 
+    /** @return Screen[] */
+    public function findByOutlet(int $outletId): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE outlet_id = ? AND is_deleted = 0";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('i', $outletId);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        
+        $screens = [];
+        while ($row = $result->fetch_assoc()) {
+            $screens[] = Screen::fromArray($row);
+        }
+
+        return $screens;
+    }
+
+
     public function create(array $data): array
     {
         $sql = "INSERT INTO {$this->table} (outlet_id, screen_name, screen_description, screen_function, created_by, customer_id)
