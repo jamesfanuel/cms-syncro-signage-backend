@@ -45,9 +45,9 @@ class FormationController
     {
         $payload = json_decode(file_get_contents('php://input'), true);
 
-        if (!$payload || !isset($payload['screen_id'])) {
+        if (!$payload || !isset($payload['customer_id'])) {
             http_response_code(400);
-            echo json_encode(['status' => 'error', 'message' => 'Data tidak valid atau screen_id kosong']);
+            echo json_encode(['status' => 'error', 'message' => 'Data tidak valid atau customer_id kosong']);
             return;
         }
 

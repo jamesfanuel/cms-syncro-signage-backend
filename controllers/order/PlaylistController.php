@@ -8,12 +8,12 @@ class PlaylistController
         $this->service = $service;
     }
 
-    public function find(?int $customerId = null): void
+    public function find(?int $customerId = null, ?int $outletId = null): void
     {
-        $clients = $this->service->find($customerId);
+        $playlists = $this->service->find($customerId, $outletId);
 
         header('Content-Type: application/json');
-        echo json_encode(['status' => 'success', 'data' => $clients]);
+        echo json_encode(['status' => 'success', 'data' => $playlists]);
     }
 
 

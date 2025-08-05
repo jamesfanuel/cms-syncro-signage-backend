@@ -14,6 +14,9 @@ class Playlist
     public $created_by;
     public $is_deleted;
     public $customer_id;
+    public ?string $outlet_name = null;
+    public ?string $screen_name = null;
+    public ?string $version_name = null;
 
     public function __construct(array $data = [])
     {
@@ -30,5 +33,13 @@ class Playlist
         $this->created_by      = $data['created_by'] ?? null;
         $this->is_deleted      = $data['is_deleted'] ?? 0;
         $this->customer_id     = $data['customer_id'] ?? null;
+        $this->outlet_name     = $data['outlet_name'] ?? null;
+        $this->screen_name     = $data['screen_name'] ?? null;
+        $this->version_name    = $data['version_name'] ?? null;
+    }
+
+    public static function fromArray(array $data): Playlist
+    {
+        return new Playlist($data);
     }
 }

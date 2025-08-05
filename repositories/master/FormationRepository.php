@@ -30,7 +30,7 @@ class FormationRepository
 
         $screens = [];
         while ($row = $result->fetch_assoc()) {
-            $screen = Formation::fromArray($row);
+            $screen = Screen::fromArray($row);
             $screen->outlet_name = $row['outlet_name'] ?? null;
             $screens[] = $screen;
         }

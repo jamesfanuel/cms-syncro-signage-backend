@@ -10,9 +10,9 @@ class PlaylistService
         $this->repository = $repository;
     }
 
-    public function find(?int $customerId = null): array
+    public function find(?int $customerId = null, ?int $outletId = null): array
     {
-        return $this->repository->find($customerId);
+        return $this->repository->find($customerId, $outletId);
     }
 
     public function findById(int $id): ?Playlist

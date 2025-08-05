@@ -66,7 +66,7 @@ class OrderItem
         if (isset($data['outlet_name'])) $this->outlet_name = $data['outlet_name'];
     }
 
-     public static function fromArray(array $data): OrderItem
+    public static function fromArray(array $data): OrderItem
     {
         return new OrderItem($data);
     }
