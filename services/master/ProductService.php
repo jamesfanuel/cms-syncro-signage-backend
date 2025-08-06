@@ -64,9 +64,9 @@ class ProductService
     }
 
     // === VERSION ===
-    public function findVersions(int $customerId): array
+    public function findVersions(int $customerId, int $productId): array
     {
-        return $this->repository->findVersions($customerId);
+        return $this->repository->findVersions($customerId, $productId);
     }
 
     public function findVersionById(int $id): ?array

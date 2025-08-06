@@ -99,9 +99,10 @@ if (preg_match('#^/api/product/version/delete/(\d+)$#', $uri, $matches) && $meth
     $controller->deleteVersion((int) $matches[1]);
 }
 
-if (preg_match('#^/api/customer/(\d+)/versions$#', $uri, $matches) && $method === 'GET') {
+if (preg_match('#^/api/customer/(\d+)/product/(\d+)/versions$#', $uri, $matches) && $method === 'GET') {
     $customerId = (int)$matches[1];
-    $controller->findVersions($customerId);
+    $productId = (int)$matches[2];
+    $controller->findVersions($customerId, $productId);
 }
 
 if (preg_match('#^/api/product/version/(\d+)/upload$#', $uri, $matches) && $method === 'POST') {

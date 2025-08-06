@@ -98,9 +98,9 @@ class ProductController
     }
 
     // Product Version
-    public function findVersions(?int $customerId = null): void
+    public function findVersions(?int $customerId = null, ?int $productId = null): void
     {
-        $versions = $this->service->findVersions($customerId);
+        $versions = $this->service->findVersions($customerId, $productId);
 
         header('Content-Type: application/json');
         echo json_encode(['status' => 'success', 'data' => $versions]);

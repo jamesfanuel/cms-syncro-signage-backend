@@ -229,18 +229,17 @@ class ProductRepository
     // Product Version CRUD
     // ===============================
 
-    public function findVersions(int $customerId): array
+    public function findVersions(int $customerId, $productId): array
     {
         $sql = "SELECT v.*, p.product_name 
         FROM {$this->tableVersion} v
         LEFT JOIN ds_product_item p ON p.product_id = v.product_id
-        WHERE v.is_deleted = 0";
-
+        WHERE v.is_deleted = 0 AND v.product_id = ?";
         
         if ($customerId !== null) {
             $sql .= " AND v.customer_id = ?";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("i", $customerId);
+            $stmt->bind_param("ii", $productId, $customerId);
             $stmt->execute();
             $result = $stmt->get_result();
         } else {
