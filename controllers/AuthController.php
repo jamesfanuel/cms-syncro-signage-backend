@@ -24,8 +24,8 @@ class AuthController
 
         $result = $this->authService->register($data);
 
-        if ($result === 'EMAIL_EXISTS') {
-            return Response::error('Email already registered', 409);
+        if ($result === 'USER_EXISTS') {
+            return Response::error('User Name already registered', 409);
         }
 
         return Response::success(['user' => $result], 'Registration successful');

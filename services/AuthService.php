@@ -14,18 +14,17 @@ class AuthService
 
     public function register(array $data): User|string
     {
-        $existingUser = $this->userRepo->findByEmail($data['email']);
+        $existingUser = $this->userRepo->findByUsername($data['user_name']);
         if ($existingUser) {
-            return 'EMAIL_EXISTS';
+            return 'USER_EXISTS';
         }
 
         $hashedPassword = password_hash("syncrosignage", PASSWORD_BCRYPT);
 
-        $createdBy = $data['created_by'] ?? null; // ✅ Tambahkan ini
+        $createdBy = $data['created_by'] ?? null;
 
         $user = new User([
             'user_name'   => $data['user_name'],
-            'email'       => $data['email'],
             'password'    => $hashedPassword,
             'is_admin'    => $data['is_admin'],
             'customer_id' => $data['customer_id'],

@@ -24,6 +24,7 @@ $prefixes = [
     'campaign' => '/api/campaign',
     'order'    => '/api/order',
     'playlist' => '/api/playlist',
+    'license' => '/api/license',
 ];
 
 // Map file ke folder khusus jika diperlukan
